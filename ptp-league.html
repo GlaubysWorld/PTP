@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portage Trail Players 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bark-deep:#241611;--cream:#F4EDDF;--cream-dim:#E3D8C3;
+  --ember:#E0722A;--pine:#2E4B3C;--rule:rgba(244,237,223,.16);
+  --display:"Oswald","Arial Narrow",sans-serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"Roboto Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--bark-deep);background-image:radial-gradient(120% 80% at 50% 0%,#3D2920 0%,#241611 70%);
+  color:var(--cream);font-family:var(--body);font-size:16px;line-height:1.5;padding:0 0 70px;min-height:100vh}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px}
+header{padding:30px 0 16px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);margin:0 0 10px}
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(34px,11vw,54px);line-height:.9;margin:0}
+h1 em{font-style:normal;display:block;color:var(--ember)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:22px 0 20px}
+.tabs button{flex:1;background:transparent;border:0;border-bottom:2px solid transparent;color:var(--cream-dim);
+  font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  padding:13px 4px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ember);border-bottom-color:var(--ember)}
+
+label.fld{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin:18px 0 8px}
+input[type=text],select,textarea{width:100%;background:rgba(0,0,0,.28);border:1px solid var(--rule);border-radius:3px;
+  color:var(--cream);font-family:var(--body);font-size:16px;padding:13px 14px}
+textarea{min-height:100px;resize:vertical;line-height:1.6}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ember);outline-offset:1px;border-color:transparent}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--cream) 50%),linear-gradient(135deg,var(--cream) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 22px,calc(100% - 14px) 22px;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.sub{margin:0 0 4px;color:var(--cream-dim);font-size:14.5px}
+
+.opt{display:block;width:100%;text-align:left;cursor:pointer;background:transparent;border:1px solid var(--rule);
+  border-radius:3px;color:var(--cream);padding:14px 16px;margin:0 0 10px;position:relative;font-family:inherit;font-size:inherit}
+.opt:hover{border-color:rgba(244,237,223,.4)}
+.opt:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
+.opt[aria-pressed="true"]{border-color:var(--ember);background:rgba(224,114,42,.12)}
+.opt .key{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ember);display:block;margin-bottom:3px}
+.opt .day{font-family:var(--display);font-weight:600;font-size:23px;text-transform:uppercase;line-height:1.1}
+.opt .note{font-size:12.5px;color:var(--cream-dim);margin-top:3px}
+.opt .tick{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:22px;height:22px;border:1px solid var(--rule);border-radius:2px}
+.opt[aria-pressed="true"] .tick{background:var(--ember);border-color:var(--ember)}
+.opt[aria-pressed="true"] .tick::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:11px;border:solid var(--bark-deep);border-width:0 2px 2px 0;transform:rotate(42deg)}
+.opt.dead{opacity:.45;cursor:not-allowed}
+.opt.dead .day{text-decoration:line-through}
+
+.btn{display:block;width:100%;margin-top:20px;padding:16px;background:var(--ember);color:#221109;border:0;border-radius:3px;
+  cursor:pointer;font-family:var(--display);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.1em}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:progress}
+.btn.ghost{background:transparent;color:var(--cream-dim);border:1px solid var(--rule);font-size:13px;padding:12px;font-weight:600}
+
+.card{border:1px solid var(--rule);border-radius:4px;padding:18px;margin-top:26px;background:rgba(0,0,0,.18)}
+h2{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px}
+.h2note{font-size:13px;color:var(--cream-dim);margin:0 0 10px}
+
+.row{padding:13px 0;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.row .name{font-family:var(--display);font-weight:600;font-size:19px;text-transform:uppercase}
+.row .cnt{font-family:var(--mono);font-size:13px;color:var(--cream-dim);white-space:nowrap}
+.bar{height:8px;background:rgba(244,237,223,.09);border-radius:1px;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pine);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.row.lead .bar i{background:var(--ember)}
+.row.lead .name{color:var(--ember)}
+.row .who{font-size:12px;color:var(--cream-dim);margin-top:7px;line-height:1.55}
+.waiting{font-size:13px;color:var(--cream-dim);margin-top:18px;padding-top:14px;border-top:1px solid var(--rule)}
+.waiting b{color:var(--cream);font-weight:600}
+
+.item{padding:16px 0;border-bottom:1px solid var(--rule)}
+.item:last-child{border-bottom:0}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 7px;border-radius:2px;margin-bottom:8px}
+.badge.on{background:var(--ember);color:#221109}
+.badge.off{border:1px solid var(--rule);color:var(--cream-dim)}
+.item h3{font-family:var(--display);font-weight:600;font-size:21px;text-transform:uppercase;margin:0 0 6px;line-height:1.15}
+.byline{font-family:var(--mono);font-size:11.5px;color:var(--cream-dim);margin:0 0 9px}
+.text{font-size:14.5px;margin:0 0 8px;white-space:pre-wrap}
+.why{font-size:13.5px;color:var(--cream-dim);margin:0 0 12px;white-space:pre-wrap}
+.seconds{font-size:12.5px;color:var(--cream-dim);margin:0 0 10px}
+.secbtn{background:transparent;border:1px solid var(--rule);color:var(--cream);border-radius:3px;padding:9px 14px;
+  font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.secbtn:hover{border-color:var(--ember)}
+
+.msg{margin-top:14px;font-size:14px;padding:12px 14px;border-radius:3px;background:rgba(46,75,60,.35);border:1px solid rgba(46,75,60,.8)}
+.msg.err{background:rgba(150,40,20,.28);border-color:rgba(200,70,40,.6)}
+.foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--rule);display:flex;gap:10px;flex-wrap:wrap}
+.foot button{flex:1;min-width:140px}
+.center{text-align:center;color:var(--cream-dim);font-size:14px;padding:34px 0}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Portage Trail Players &middot; 2026</p>
+    <h1>League<em>Business</em></h1>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button id="tab-poll" role="tab" aria-selected="true">Draft night</button>
+    <button id="tab-rules" role="tab" aria-selected="false">Rule changes</button>
+  </div>
+
+  <div id="pane-poll"></div>
+  <div id="pane-rules" class="hide"></div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG - the only part you edit
+   ============================================================ */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwonUrrq_kw8IsZdnA1lekQwG6MhN0Mzkjnx_VLwthjEEsKSP914_xET1eN1gARDOrb/exec";
+
+const TEAMS = [
+  'Art Vandagay and His Groupies and Hoes',
+  'Brown Crown',
+  'Carson Rosy Palmers',
+  'Deltas',
+  'Globbies',
+  'Nellyville Nellies',
+  'Prestige Worldwide',
+  'The Boots',
+  'The Skid Marks',
+  'The Trinity'
+];
+
+const POLL_DEADLINE  = 'Friday 8/14, 5pm CT';
+const RULES_DEADLINE = 'Sunday 8/23, 8pm CT';
+
+const OPTIONS = [
+  {id:'a', day:'Tue, Sep 1', note:'8:30pm ET / 7:30pm CT'},
+  {id:'b', day:'Wed, Sep 2', note:'8:30pm ET / 7:30pm CT'},
+  {id:'c', day:'Thu, Sep 3', note:'8:30pm ET / 7:30pm CT'},
+  {id:'d', day:'Sun, Sep 6', note:'Labor Day weekend. 8:30pm ET / 7:30pm CT'},
+  {id:'e', day:'Tue, Sep 8', note:'Last clean night. 8:30pm ET / 7:30pm CT'},
+  {id:'x', day:'None of these work', note:'Say so and we will find another night', solo:true}
+];
+const DEAD = [
+  {day:'Mon, Sep 7', note:'Labor Day. Two teams already out.'},
+  {day:'Wed, Sep 9', note:'NFL opener, Patriots at Seahawks, 8:20pm ET.'}
+];
+/* ========================= end config ========================= */
+
+let data = {votes:[], rules:[]};
+let picks = new Set();
+let activeTab = 'poll';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const configured = () => ENDPOINT && ENDPOINT.indexOf('PASTE_YOUR') === -1;
+
+/* ---------- transport ---------- */
+async function api(payload){
+  if(!configured()) throw new Error('not configured');
+  const opts = payload
+    // text/plain keeps this a simple request, so the browser skips the CORS preflight
+    ? {method:'POST', body: JSON.stringify(payload), headers:{'Content-Type':'text/plain;charset=utf-8'}, redirect:'follow'}
+    : {method:'GET', redirect:'follow'};
+  const res = await fetch(ENDPOINT, opts);
+  if(!res.ok) throw new Error('http ' + res.status);
+  const json = await res.json();
+  if(json && json.ok === false) throw new Error(json.error || 'server error');
+  data = {votes: json.votes || [], rules: json.rules || []};
+  return data;
+}
+
+async function refresh(){
+  try{ await api(null); }
+  catch(e){ /* render will show the banner */ }
+  renderPoll(); renderRules();
+}
+
+function banner(){
+  if(configured()) return '';
+  return `<div class="msg err">This page is not connected yet. Open the file and paste your Apps Script URL into <b>ENDPOINT</b> at the top of the script.</div>`;
+}
+
+/* ---------- tabs ---------- */
+function show(tab){
+  activeTab = tab;
+  $('tab-poll').setAttribute('aria-selected', tab === 'poll');
+  $('tab-rules').setAttribute('aria-selected', tab === 'rules');
+  $('pane-poll').classList.toggle('hide', tab !== 'poll');
+  $('pane-rules').classList.toggle('hide', tab !== 'rules');
+}
+$('tab-poll').onclick  = () => show('poll');
+$('tab-rules').onclick = () => show('rules');
+
+/* ---------- poll ---------- */
+function renderPoll(){
+  const voted = data.votes.map(v => v.team);
+  const optHtml = OPTIONS.map((o,i) => `
+    <button class="opt" type="button" data-id="${o.id}" data-solo="${o.solo?1:0}" aria-pressed="${picks.has(o.id)}">
+      <span class="key">${o.solo ? '&mdash;' : String.fromCharCode(65+i)}</span>
+      <span class="day">${esc(o.day)}</span>
+      <span class="note">${esc(o.note)}</span>
+      <span class="tick"></span>
+    </button>`).join('');
+  const deadHtml = DEAD.map(d => `
+    <button class="opt dead" disabled>
+      <span class="key">Out</span><span class="day">${esc(d.day)}</span><span class="note">${esc(d.note)}</span>
+    </button>`).join('');
+
+  $('pane-poll').innerHTML = `
+    ${banner()}
+    <p class="sub">Pick every night that works, not just your favorite. One vote per team. Closes <b>${esc(POLL_DEADLINE)}</b>.</p>
+
+    <label class="fld" for="pteam">Your team</label>
+    <select id="pteam"><option value="">Choose your team</option>
+      ${TEAMS.map(t => `<option value="${esc(t)}">${esc(t)}${voted.includes(t) ? ' — voted' : ''}</option>`).join('')}</select>
+    <div id="palready"></div>
+
+    <label class="fld" for="prep">Who is repping the team on draft night</label>
+    <input type="text" id="prep" placeholder="Your name">
+
+    <label class="fld">Nights that work</label>
+    ${optHtml}${deadHtml}
+
+    <button class="btn" id="pgo">Lock in my team's vote</button>
+    <div id="pmsg"></div>
+
+    <div class="card">
+      <h2>Where it stands</h2>
+      <p class="h2note">Everyone in the league sees these answers.</p>
+      <div id="ptally"></div>
+      <div id="pwait" class="waiting"></div>
+    </div>
+
+    <div class="foot">
+      <button class="btn ghost" id="pcopy">Copy tally for email</button>
+      <button class="btn ghost" id="prefresh">Refresh</button>
+    </div>`;
+
+  $('pane-poll').querySelectorAll('.opt:not(.dead)').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.id, solo = btn.dataset.solo === '1';
+      if(picks.has(id)) picks.delete(id);
+      else{
+        if(solo) picks.clear();
+        else OPTIONS.filter(o => o.solo).forEach(o => picks.delete(o.id));
+        picks.add(id);
+      }
+      $('pane-poll').querySelectorAll('.opt:not(.dead)').forEach(b => b.setAttribute('aria-pressed', picks.has(b.dataset.id)));
+    };
+  });
+
+  $('pteam').onchange = () => {
+    const v = data.votes.find(x => x.team === $('pteam').value);
+    picks.clear();
+    if(v){
+      $('palready').innerHTML = `<div class="msg">${esc(v.team)} already voted, logged by ${esc(v.rep)}. Submitting again replaces it.</div>`;
+      $('prep').value = v.rep;
+      v.picks.forEach(p => picks.add(p));
+    } else {
+      $('palready').innerHTML = '';
+      $('prep').value = '';
+    }
+    $('pane-poll').querySelectorAll('.opt:not(.dead)').forEach(b => b.setAttribute('aria-pressed', picks.has(b.dataset.id)));
+  };
+
+  $('pgo').onclick = async () => {
+    const team = $('pteam').value, rep = $('prep').value.trim(), msg = $('pmsg');
+    if(!team){ msg.innerHTML = '<div class="msg err">Choose your team first.</div>'; return; }
+    if(!rep){ msg.innerHTML = '<div class="msg err">Add the rep\u2019s name so we know who to expect.</div>'; return; }
+    if(!picks.size){ msg.innerHTML = '<div class="msg err">Tap at least one night.</div>'; return; }
+    $('pgo').disabled = true; $('pgo').textContent = 'Saving\u2026';
+    try{
+      await api({action:'vote', team, rep, picks:[...picks]});
+      renderPoll(); renderRules();
+      $('pmsg').innerHTML = `<div class="msg">Locked in for ${esc(team)}.</div>`;
+    }catch(e){
+      $('pgo').disabled = false; $('pgo').textContent = "Lock in my team's vote";
+      msg.innerHTML = '<div class="msg err">That did not save. Check your connection and tap again.</div>';
+    }
+  };
+
+  $('prefresh').onclick = refresh;
+  $('pcopy').onclick = () => copy(tallyText(), 'pmsg');
+
+  drawTally();
+}
+
+function counts(){
+  const c = {};
+  OPTIONS.forEach(o => c[o.id] = []);
+  data.votes.forEach(v => v.picks.forEach(p => { if(c[p]) c[p].push(v.team); }));
+  return c;
+}
+
+function drawTally(){
+  const c = counts(), total = TEAMS.length;
+  const live = OPTIONS.filter(o => !o.solo);
+  const best = Math.max(0, ...live.map(o => c[o.id].length));
+  $('ptally').innerHTML = OPTIONS.map(o => {
+    const n = c[o.id].length, lead = !o.solo && n === best && n > 0;
+    return `<div class="row ${lead ? 'lead' : ''}">
+      <div class="top"><span class="name">${esc(o.day)}</span><span class="cnt">${n} of ${total}</span></div>
+      ${o.solo ? '' : `<div class="bar"><i style="width:${total ? Math.round(n/total*100) : 0}%"></i></div>`}
+      ${n ? `<div class="who">${c[o.id].map(esc).join(' &middot; ')}</div>` : ''}
+    </div>`;
+  }).join('');
+  const missing = TEAMS.filter(t => !data.votes.some(v => v.team === t));
+  $('pwait').innerHTML = missing.length
+    ? `Still waiting on <b>${missing.length}</b>: ${missing.map(esc).join(', ')}`
+    : `<b>All ${TEAMS.length} teams are in.</b> Most check marks wins. Tie goes to the later date.`;
+}
+
+function tallyText(){
+  const c = counts(), total = TEAMS.length;
+  const lines = ['PTP 2026 draft night, where it stands:',''];
+  OPTIONS.forEach(o => lines.push(`${o.day} — ${c[o.id].length}/${total}${c[o.id].length ? ': ' + c[o.id].join(', ') : ''}`));
+  const missing = TEAMS.filter(t => !data.votes.some(v => v.team === t));
+  lines.push('', missing.length ? `Still waiting on: ${missing.join(', ')}` : 'All teams are in.');
+  return lines.join('\n');
+}
+
+/* ---------- rules ---------- */
+function renderRules(){
+  const onBallot = data.rules.filter(r => r.seconds.length > 0).length;
+  $('pane-rules').innerHTML = `
+    ${banner()}
+    <p class="sub">Anyone can submit. Everything posts publicly the second it lands. Closes <b>${esc(RULES_DEADLINE)}</b>.</p>
+
+    <label class="fld" for="rteam">Your team</label>
+    <select id="rteam"><option value="">Choose your team</option>
+      ${TEAMS.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}</select>
+
+    <label class="fld" for="rwho">Your name</label>
+    <input type="text" id="rwho" placeholder="Who is submitting">
+
+    <label class="fld" for="rtitle">Rule, in one line</label>
+    <input type="text" id="rtitle" placeholder="e.g. Remove the kicker roster spot">
+
+    <label class="fld" for="rtext">The actual rule</label>
+    <textarea id="rtext" placeholder="Write it the way it would read in the constitution. If it is vague here, it gets argued about for three weeks."></textarea>
+
+    <label class="fld" for="rwhy">Why</label>
+    <textarea id="rwhy" placeholder="One or two sentences." style="min-height:76px"></textarea>
+
+    <button class="btn" id="rgo">Submit rule</button>
+    <div id="rmsg"></div>
+
+    <div class="card">
+      <h2>On the board</h2>
+      <p class="h2note">${data.rules.length} submitted &middot; ${onBallot} seconded by another team. A rule needs a second from a different team to reach the ballot.</p>
+      <div id="rlist"></div>
+    </div>
+
+    <div class="foot">
+      <button class="btn ghost" id="rcopy">Copy the board for email</button>
+      <button class="btn ghost" id="rrefresh">Refresh</button>
+    </div>`;
+
+  $('rgo').onclick = async () => {
+    const team = $('rteam').value, who = $('rwho').value.trim(), title = $('rtitle').value.trim();
+    const text = $('rtext').value.trim(), why = $('rwhy').value.trim(), msg = $('rmsg');
+    if(!team || !who || !title || !text){
+      msg.innerHTML = '<div class="msg err">Team, name, the one-liner and the rule text are all required.</div>'; return;
+    }
+    $('rgo').disabled = true; $('rgo').textContent = 'Saving\u2026';
+    try{
+      await api({action:'rule', team, who, title, text, why});
+      renderRules();
+      $('rmsg').innerHTML = '<div class="msg">Posted. Everyone can see it now.</div>';
+    }catch(e){
+      $('rgo').disabled = false; $('rgo').textContent = 'Submit rule';
+      msg.innerHTML = '<div class="msg err">That did not save. Check your connection and tap again.</div>';
+    }
+  };
+
+  $('rrefresh').onclick = refresh;
+  $('rcopy').onclick = () => copy(boardText(), 'rmsg');
+
+  drawRules();
+}
+
+function drawRules(){
+  const list = $('rlist');
+  if(!data.rules.length){ list.innerHTML = '<p class="center">Nothing submitted yet.</p>'; return; }
+  list.innerHTML = data.rules.map((r,i) => {
+    const live = r.seconds.length > 0;
+    return `<div class="item">
+      <span class="badge ${live ? 'on' : 'off'}">${live ? 'On the ballot' : 'Needs a second'}</span>
+      <h3>${i+1}. ${esc(r.title)}</h3>
+      <p class="byline">${esc(r.team)} &middot; ${esc(r.who)}</p>
+      <p class="text">${esc(r.text)}</p>
+      ${r.why ? `<p class="why">Why: ${esc(r.why)}</p>` : ''}
+      <p class="seconds">${r.seconds.length ? 'Seconded by: ' + r.seconds.map(esc).join(', ') : 'No second yet.'}</p>
+      <button class="secbtn" data-id="${esc(r.id)}">Second this</button>
+    </div>`;
+  }).join('');
+
+  list.querySelectorAll('.secbtn').forEach(b => {
+    b.onclick = async () => {
+      const team = $('rteam').value, msg = $('rmsg');
+      const r = data.rules.find(x => x.id === b.dataset.id);
+      if(!team){ msg.innerHTML = '<div class="msg err">Pick your team at the top first.</div>'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+      if(r.team === team){ msg.innerHTML = '<div class="msg err">You cannot second your own rule.</div>'; return; }
+      if(r.seconds.includes(team)){ msg.innerHTML = '<div class="msg err">Your team already seconded that one.</div>'; return; }
+      b.disabled = true;
+      try{ await api({action:'second', id:r.id, team}); renderRules(); }
+      catch(e){ b.disabled = false; msg.innerHTML = '<div class="msg err">That did not save. Tap again.</div>'; }
+    };
+  });
+}
+
+function boardText(){
+  const lines = ['PTP 2026 rule submissions:',''];
+  data.rules.forEach((r,i) => {
+    lines.push(`${i+1}. ${r.title} — ${r.team} (${r.who})`);
+    lines.push(`   ${r.text}`);
+    if(r.why) lines.push(`   Why: ${r.why}`);
+    lines.push(`   ${r.seconds.length ? 'Seconded by: ' + r.seconds.join(', ') + ' — ON THE BALLOT' : 'No second yet'}`);
+    lines.push('');
+  });
+  lines.push(`Submissions close ${RULES_DEADLINE}.`);
+  return lines.join('\n');
+}
+
+function copy(text, msgId){
+  navigator.clipboard.writeText(text).then(
+    () => { $(msgId).innerHTML = '<div class="msg">Copied.</div>'; },
+    () => { $(msgId).innerHTML = '<div class="msg err">Copy blocked. Screenshot it instead.</div>'; }
+  );
+}
+
+show('poll');
+refresh();
+</script>
+</body>
+</html>
