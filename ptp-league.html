@@ -108,12 +108,11 @@ h2{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.16e
   </header>
 
   <div class="tabs" role="tablist">
-    <button id="tab-poll" role="tab" aria-selected="true">Draft night</button>
-    <button id="tab-rules" role="tab" aria-selected="false">Rule changes</button>
+    <button id="tab-rules" role="tab" aria-selected="true">Rule changes</button>
   </div>
 
-  <div id="pane-poll"></div>
-  <div id="pane-rules" class="hide"></div>
+  <div id="pane-poll" class="hide"></div>
+  <div id="pane-rules"></div>
 </div>
 
 <script>
@@ -188,14 +187,16 @@ function banner(){
 
 /* ---------- tabs ---------- */
 function show(tab){
-  activeTab = tab;
-  $('tab-poll').setAttribute('aria-selected', tab === 'poll');
-  $('tab-rules').setAttribute('aria-selected', tab === 'rules');
-  $('pane-poll').classList.toggle('hide', tab !== 'poll');
-  $('pane-rules').classList.toggle('hide', tab !== 'rules');
+  activeTab = tab === 'poll' ? 'poll' : 'rules';
+  const pollTab = $('tab-poll');
+  const rulesTab = $('tab-rules');
+  if(pollTab) pollTab.setAttribute('aria-selected', activeTab === 'poll');
+  if(rulesTab) rulesTab.setAttribute('aria-selected', activeTab === 'rules');
+  $('pane-poll').classList.toggle('hide', activeTab !== 'poll');
+  $('pane-rules').classList.toggle('hide', activeTab !== 'rules');
 }
-$('tab-poll').onclick  = () => show('poll');
-$('tab-rules').onclick = () => show('rules');
+if($('tab-poll')) $('tab-poll').onclick  = () => show('poll');
+if($('tab-rules')) $('tab-rules').onclick = () => show('rules');
 
 /* ---------- poll ---------- */
 function renderPoll(){
@@ -435,7 +436,7 @@ function copy(text, msgId){
   );
 }
 
-show('poll');
+show('rules');
 refresh();
 </script>
 </body>
